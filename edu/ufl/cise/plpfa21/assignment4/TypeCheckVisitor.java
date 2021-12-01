@@ -12,6 +12,7 @@ import edu.ufl.cise.plpfa21.assignment3.ast.IBlock;
 import edu.ufl.cise.plpfa21.assignment3.ast.IBooleanLiteralExpression;
 import edu.ufl.cise.plpfa21.assignment3.ast.IDeclaration;
 import edu.ufl.cise.plpfa21.assignment3.ast.IExpression;
+import edu.ufl.cise.plpfa21.assignment3.ast.IExpressionStatement;
 import edu.ufl.cise.plpfa21.assignment3.ast.IFunctionCallExpression;
 import edu.ufl.cise.plpfa21.assignment3.ast.IFunctionDeclaration;
 import edu.ufl.cise.plpfa21.assignment3.ast.IIdentExpression;
@@ -180,6 +181,7 @@ public class TypeCheckVisitor implements ASTVisitor {
 		IExpression expression = n.getExpression(); // IIMutableGlobal must have initalizing expression
 		IType expressionType = (IType) expression.visit(this, arg);
 		INameDef nameDef = n.getVarDef();
+		nameDef.getIdent().setGlobal();
 		IType declaredType = (IType) nameDef.visit(this, n);
 		IType inferredType = unifyAndCheck(declaredType, expressionType, n);
 		nameDef.setType(inferredType);
@@ -400,6 +402,7 @@ public class TypeCheckVisitor implements ASTVisitor {
 		IExpression expression = n.getExpression();
 		IType expressionType = expression != null ? (IType) expression.visit(this, arg) : Type__.undefinedType;
 		INameDef def = n.getVarDef();
+		def.getIdent().setGlobal();
 		IType declaredType = (IType) def.visit(this, n);
 		IType inferredType = unifyAndCheck(declaredType, expressionType, n);
 		def.setType(inferredType);
@@ -497,7 +500,14 @@ public class TypeCheckVisitor implements ASTVisitor {
 		String name = n.getName();
 		IDeclaration dec = symtab.lookupDec(name);
 		check(dec != null, n, "identifier not declared");
+		n.setDec(dec);
 		return dec;
+	}
+
+	@Override
+	public Object visitIExpressionStatement(IExpressionStatement n, Object arg) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

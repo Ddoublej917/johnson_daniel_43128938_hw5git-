@@ -39,6 +39,7 @@ public class Identifier__ extends ASTNode__ implements IIdentifier {
 	}
    
 	int slot = -1;
+	
 
 	public int getSlot() {
 		return slot;
@@ -46,6 +47,16 @@ public class Identifier__ extends ASTNode__ implements IIdentifier {
 
 	public void setSlot(int slot) {
 		this.slot = slot;
+	}
+	
+	boolean global = false;
+	
+	public boolean getGlobal() {
+		return global;
+	}
+
+	public void setGlobal() {
+		this.global = true;
 	}
 	
 }

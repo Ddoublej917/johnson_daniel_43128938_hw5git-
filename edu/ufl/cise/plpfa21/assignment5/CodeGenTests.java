@@ -499,7 +499,7 @@ public class CodeGenTests {
 		assertEquals("Gruetzi", getString(testClass, "x"));
 	}
 
-	@DisplayName("accessGlobal_boolean0")
+	@DisplayName("updateGlobal_boolean0")
 	@Test
 	public void updateGlobal_boolean0(TestInfo testInfo) throws Exception {
 		String input = """
