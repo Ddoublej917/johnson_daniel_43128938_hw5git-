@@ -121,15 +121,7 @@ class ExampleLexerTests implements PLPTokenKinds {
 		});
 	}
 	
-	@Test
-	public void testempty() throws LexicalException {
-		String input = "\"\"";
-		IPLPLexer lexer = getLexer(input);
-		assertThrows(LexicalException.class, () -> {
-			@SuppressWarnings("unused")
-			IPLPToken token = lexer.nextToken();
-		});
-	}
+	
 	
 	@Test
 	public void testor() throws LexicalException {

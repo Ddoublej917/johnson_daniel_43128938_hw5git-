@@ -397,10 +397,10 @@ public class Lexer implements IPLPLexer {
 						}
 						case '\'' -> {
 							txt = txt + ch;
-							if(txt.equals("\'\'")) {
+							if(txt == "\'\'\'") {
 								this.add(new Token(Token.Kind.ERROR, startPos, pos - startPos, startLine, startPosInLine, txt));
 								this.current = this.current.next;
-								this.current.errorMessage = "Empty string literal (\'\')";
+								this.current.errorMessage = "Triple apostrophe, illegal comment";
 								txt = "";
 								pos++;
 								posInLine++;
@@ -430,10 +430,10 @@ public class Lexer implements IPLPLexer {
 						}
 						case '\"' -> {
 							txt = txt + ch;
-							if(txt.equals("\"\"")) {
+							if(txt == "\"\"\"") {
 								this.add(new Token(Token.Kind.ERROR, startPos, pos - startPos, startLine, startPosInLine, txt));
 								this.current = this.current.next;
-								this.current.errorMessage = "Empty string literal (\"\")";
+								this.current.errorMessage = "Triple parentheses, illegal comment";
 								txt = "";
 								pos++;
 								posInLine++;
